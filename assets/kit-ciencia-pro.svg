@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="675" viewBox="0 0 900 675" role="img" aria-labelledby="title desc">
+  <title id="title">Kit de Ciencia Pro</title>
+  <desc id="desc">Ilustracion de un kit de ciencias con tubos de ensayo, matraz y libreta de experimentos.</desc>
+  <rect width="900" height="675" fill="#dff0ff"/>
+  <circle cx="138" cy="105" r="68" fill="#ffd43b" opacity=".9"/>
+  <circle cx="770" cy="118" r="95" fill="#dcfbe8"/>
+  <circle cx="735" cy="543" r="118" fill="#ffe1e1"/>
+  <rect x="145" y="430" width="610" height="64" rx="32" fill="#22304a" opacity=".12"/>
+  <rect x="205" y="181" width="490" height="295" rx="34" fill="#fff" stroke="#22304a" stroke-width="12"/>
+  <rect x="250" y="132" width="400" height="72" rx="28" fill="#1e88ff" stroke="#22304a" stroke-width="12"/>
+  <rect x="298" y="118" width="82" height="36" rx="16" fill="#fff"/>
+  <rect x="520" y="118" width="82" height="36" rx="16" fill="#fff"/>
+  <rect x="280" y="260" width="64" height="148" rx="30" fill="#fff" stroke="#22304a" stroke-width="10"/>
+  <rect x="286" y="335" width="52" height="67" rx="24" fill="#35c96f"/>
+  <rect x="405" y="250" width="80" height="158" rx="34" fill="#fff" stroke="#22304a" stroke-width="10"/>
+  <rect x="413" y="315" width="64" height="85" rx="28" fill="#ff4d4d"/>
+  <path d="M573 248h44v68l58 90c20 32-3 74-41 74H556c-38 0-61-42-41-74l58-90v-68Z" fill="#fff" stroke="#22304a" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M545 397h101l19 30c11 18-2 42-23 42h-93c-21 0-34-24-23-42l19-30Z" fill="#ffd43b"/>
+  <rect x="553" y="218" width="84" height="42" rx="18" fill="#fff" stroke="#22304a" stroke-width="10"/>
+  <circle cx="330" cy="286" r="8" fill="#1e88ff"/>
+  <circle cx="455" cy="282" r="9" fill="#35c96f"/>
+  <circle cx="630" cy="355" r="10" fill="#ff4d4d"/>
+  <path d="M210 538h480" stroke="#22304a" stroke-width="14" stroke-linecap="round" opacity=".16"/>
+</svg>

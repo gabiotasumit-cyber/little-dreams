@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Little Dreams - Juguetes de Crochet</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #fff8f0;
+      --yarn-red: #c0392b;
+      --yarn-blue: #2e5eaa;
+      --yarn-yellow: #f4c842;
+      --yarn-green: #4caf78;
+      --yarn-pink: #f48fb1;
+      --brown: #8b5e3c;
+      --dark: #2c1810;
+      --white: #ffffff;
+      --soft-shadow: 0 16px 45px rgba(44, 24, 16, 0.12);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--cream);
+      color: var(--dark);
+      font-family: "Nunito", sans-serif;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 15% 25%, rgba(192, 57, 43, 0.06) 0%, transparent 40%),
+        radial-gradient(circle at 85% 70%, rgba(46, 94, 170, 0.07) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(244, 200, 66, 0.05) 0%, transparent 60%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .cursor {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--yarn-red);
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease, background 0.2s;
+      mix-blend-mode: multiply;
+    }
+
+    .yarn-line {
+      position: fixed;
+      width: 3px;
+      height: 100%;
+      top: 0;
+      left: 6%;
+      background: repeating-linear-gradient(180deg, var(--yarn-red) 0 12px, transparent 12px 18px);
+      opacity: 0.15;
+      z-index: 0;
+    }
+    .yarn-line:nth-child(2) {
+      left: 94%;
+      background: repeating-linear-gradient(180deg, var(--yarn-blue) 0 12px, transparent 12px 18px);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--dark);
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      box-shadow: 0 4px 20px rgba(44, 24, 16, 0.3);
+    }
+
+    .logo {
+      font-family: "Pacifico", cursive;
+      font-size: 2rem;
+      color: var(--yarn-yellow);
+      letter-spacing: 1px;
+      text-shadow: 3px 3px 0 var(--yarn-red);
+      animation: logoBounce 3s ease-in-out infinite;
+      cursor: none;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    @keyframes logoBounce {
+      0%, 100% { transform: rotate(-2deg); }
+      50% { transform: rotate(2deg); }
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 2px solid rgba(255, 248, 240, 0.18);
+      border-radius: 12px;
+      background: rgba(255, 248, 240, 0.06);
+      color: var(--cream);
+      cursor: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .menu-toggle span {
+      width: 22px;
+      height: 3px;
+      border-radius: 3px;
+      background: var(--yarn-yellow);
+      transition: transform 0.25s, opacity 0.25s;
+    }
+    .menu-toggle.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .menu-toggle.active span:nth-child(2) { opacity: 0; }
+    .menu-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    nav { display: flex; align-items: center; }
+    nav a {
+      color: var(--cream);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-left: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.2s;
+      cursor: none;
+    }
+    nav a:hover { color: var(--yarn-yellow); }
+
+    section { position: relative; z-index: 1; }
+
+    #inicio {
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 5%;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      text-align: center;
+      animation: fadeUp 1s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--yarn-red);
+      color: white;
+      font-weight: 900;
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 50px;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s ease 0.2s both;
+    }
+
+    #inicio h1 {
+      font-family: "Pacifico", cursive;
+      font-size: clamp(3.2rem, 9vw, 7rem);
+      color: var(--dark);
+      line-height: 1;
+      margin-bottom: 1rem;
+      animation: fadeUp 0.8s ease 0.3s both;
+    }
+    #inicio h1 span {
+      color: var(--yarn-red);
+      display: inline-block;
+      animation: wiggle 2s ease-in-out 1.5s infinite;
+    }
+
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-4deg); }
+      75% { transform: rotate(4deg); }
+    }
+
+    #inicio p {
+      font-size: 1.3rem;
+      color: var(--brown);
+      max-width: 620px;
+      margin: 0 auto 2.5rem;
+      font-weight: 600;
+      animation: fadeUp 0.8s ease 0.5s both;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.8s ease 0.7s both;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      border-radius: 50px;
+      font-size: 1.05rem;
+      font-weight: 900;
+      font-family: "Nunito", sans-serif;
+      cursor: none;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
+    }
+    .btn-primary {
+      background: var(--yarn-red);
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      box-shadow: 0 6px 0 #8b1a0a;
+    }
+    .btn-primary:hover { transform: translateY(-4px); box-shadow: 0 10px 0 #8b1a0a; }
+    .btn-secondary {
+      background: transparent;
+      color: var(--dark);
+      border: 3px solid var(--dark);
+      padding: 12px 30px;
+    }
+    .btn-secondary:hover { background: var(--dark); color: var(--cream); transform: translateY(-4px); }
+
+    .floaters { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+    .float-item {
+      position: absolute;
+      width: clamp(74px, 9vw, 118px);
+      aspect-ratio: 1;
+      opacity: 0.72;
+      animation: floatAround linear infinite;
+      filter: drop-shadow(0 12px 15px rgba(44, 24, 16, 0.12));
+    }
+    .float-item img { width: 100%; height: 100%; object-fit: contain; }
+    .float-item:nth-child(1) { top: 8%; left: 5%; animation-duration: 8s; }
+    .float-item:nth-child(2) { top: 15%; right: 7%; animation-duration: 10s; animation-delay: -3s; }
+    .float-item:nth-child(3) { bottom: 20%; left: 3%; animation-duration: 9s; animation-delay: -5s; }
+    .float-item:nth-child(4) { bottom: 10%; right: 5%; animation-duration: 7s; animation-delay: -2s; }
+    .float-item:nth-child(5) { top: 50%; left: 1%; animation-duration: 11s; animation-delay: -7s; }
+    .float-item:nth-child(6) { top: 40%; right: 2%; animation-duration: 8.5s; animation-delay: -4s; }
+
+    @keyframes floatAround {
+      0% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-20px) rotate(5deg); }
+      50% { transform: translateY(-10px) rotate(-3deg); }
+      75% { transform: translateY(-25px) rotate(8deg); }
+      100% { transform: translateY(0) rotate(0deg); }
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .section-title h2 {
+      font-family: "Pacifico", cursive;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+    .section-title p {
+      color: var(--brown);
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .title-line {
+      width: 80px;
+      height: 6px;
+      background: var(--yarn-red);
+      border-radius: 3px;
+      margin: 0.8rem auto 0;
+    }
+
+    #coleccion {
+      padding: 5rem 5%;
+      background: var(--dark);
+    }
+    #coleccion .section-title h2 { color: var(--yarn-yellow); }
+    #coleccion .section-title p { color: rgba(255, 248, 240, 0.7); }
+
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 1.5rem;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+    .cat-card {
+      background: rgba(255, 248, 240, 0.05);
+      border: 2px solid rgba(255, 248, 240, 0.1);
+      border-radius: 20px;
+      padding: 1.5rem;
+      text-align: center;
+      cursor: none;
+      transition: transform 0.3s, background 0.3s, border-color 0.3s;
+      overflow: hidden;
+    }
+    .cat-card:hover {
+      transform: translateY(-8px) scale(1.03);
+      border-color: var(--yarn-yellow);
+      background: rgba(244, 200, 66, 0.08);
+    }
+    .cat-card img {
+      width: 118px;
+      height: 118px;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto 1rem;
+      border-radius: 22px;
+      filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.18));
+    }
+    .cat-card .photo-placeholder {
+      width: 118px;
+      min-height: 118px;
+      height: 118px;
+      margin: 0 auto 1rem;
+      font-size: 0.76rem;
+    }
+    .cat-card h3 { color: var(--cream); font-size: 1.05rem; font-weight: 900; margin-bottom: 0.3rem; }
+    .cat-card p { color: rgba(255, 248, 240, 0.58); font-size: 0.86rem; }
+
+    #catalogo,
+    #productos,
+    #galeria,
+    #testimonios,
+    #faq,
+    #personalizar {
+      padding: 5rem 5%;
+    }
+
+    .featured-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 1.6rem;
+    }
+    .featured-card {
+      min-height: 420px;
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--soft-shadow);
+      display: grid;
+      grid-template-columns: 1fr 0.95fr;
+      align-items: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .featured-card:hover { transform: translateY(-8px); box-shadow: 0 24px 60px rgba(44, 24, 16, 0.17); }
+    .featured-card.main { background: linear-gradient(135deg, #fff1ef, #fff8d6); }
+    .featured-stack { display: grid; gap: 1.6rem; }
+    .featured-mini {
+      min-height: 200px;
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--soft-shadow);
+      display: grid;
+      grid-template-columns: 0.9fr 1fr;
+      align-items: center;
+      transition: transform 0.3s;
+    }
+    .featured-mini:hover { transform: translateY(-6px); }
+    .featured-media,
+    .featured-mini-media {
+      height: 100%;
+      min-height: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.9), rgba(244, 143, 177, 0.2));
+    }
+    .featured-media img { width: min(100%, 360px); max-height: 360px; object-fit: contain; }
+    .featured-mini-media img { width: min(100%, 170px); max-height: 170px; object-fit: contain; }
+    .featured-media img,
+    .featured-mini-media img {
+      height: 100%;
+      border-radius: 20px;
+      object-fit: cover;
+      box-shadow: 0 14px 28px rgba(44, 24, 16, 0.13);
+    }
+    .featured-media img.real-product-photo {
+      width: 100%;
+      height: auto;
+      max-height: 390px;
+      object-fit: contain;
+      object-position: center;
+      background: rgba(255, 255, 255, 0.72);
+    }
+    .featured-info { padding: 2rem; }
+    .featured-badge {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      background: var(--yarn-red);
+      color: white;
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 5px 13px;
+      border-radius: 50px;
+      margin-bottom: 0.9rem;
+    }
+    .featured-info h3 { font-size: clamp(1.5rem, 3vw, 2.2rem); line-height: 1.1; margin-bottom: 0.8rem; font-weight: 900; }
+    .featured-mini .featured-info { padding: 1.3rem; }
+    .featured-mini .featured-info h3 { font-size: 1.15rem; }
+    .featured-info p { color: #7d6657; line-height: 1.6; margin-bottom: 1rem; font-weight: 600; }
+
+    .prod-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .prod-card {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(44, 24, 16, 0.08);
+      cursor: none;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+    }
+    .prod-card:hover {
+      transform: translateY(-10px) rotate(1deg);
+      box-shadow: 0 20px 50px rgba(44, 24, 16, 0.15);
+    }
+    .prod-card.client-new {
+      border: 1px solid rgba(244, 200, 66, 0.28);
+    }
+    .prod-img {
+      height: 230px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #ffecec, #fff8d6);
+    }
+    .prod-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.45s ease;
+    }
+    .prod-img img.client-photo {
+      object-position: center;
+    }
+    .photo-placeholder {
+      width: 82%;
+      height: 82%;
+      min-height: 132px;
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+      border: 2px dashed rgba(139, 94, 60, 0.34);
+      border-radius: 22px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.84), rgba(255, 248, 240, 0.58)),
+        repeating-linear-gradient(45deg, rgba(244, 200, 66, 0.16) 0 10px, rgba(244, 143, 177, 0.14) 10px 20px);
+      color: var(--brown);
+      text-align: center;
+      font-size: 0.88rem;
+      font-weight: 900;
+      line-height: 1.35;
+    }
+    .featured-media .photo-placeholder { min-height: 300px; }
+    .featured-mini-media .photo-placeholder { min-height: 142px; }
+    .prod-card:hover .prod-img img { transform: scale(1.08) rotate(-2deg); }
+    .prod-img::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.06));
+    }
+    .prod-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: var(--yarn-red);
+      color: white;
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 50px;
+      z-index: 1;
+    }
+    .prod-body { padding: 1.5rem; }
+    .stars { color: var(--yarn-yellow); font-size: 0.9rem; margin-bottom: 0.5rem; letter-spacing: 2px; }
+    .prod-body h3 { font-size: 1.15rem; font-weight: 900; color: var(--dark); margin-bottom: 0.4rem; }
+    .prod-body p { font-size: 0.9rem; color: #807064; margin-bottom: 1rem; line-height: 1.5; }
+    .prod-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .price {
+      font-family: "Pacifico", cursive;
+      font-size: 1.45rem;
+      color: var(--yarn-red);
+      white-space: nowrap;
+    }
+    .catalog-note {
+      max-width: 1100px;
+      margin: 1.6rem auto 0;
+      padding: 1rem 1.2rem;
+      border-left: 6px solid var(--yarn-yellow);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.82);
+      color: var(--brown);
+      font-weight: 800;
+      line-height: 1.55;
+      box-shadow: 0 8px 24px rgba(44, 24, 16, 0.07);
+    }
+    .add-btn {
+      background: var(--dark);
+      color: var(--yarn-yellow);
+      border: none;
+      padding: 10px 18px;
+      border-radius: 50px;
+      font-weight: 900;
+      font-family: "Nunito", sans-serif;
+      font-size: 0.86rem;
+      cursor: none;
+      transition: background 0.2s, transform 0.2s;
+      white-space: nowrap;
+    }
+    .add-btn:hover { background: var(--yarn-red); color: white; transform: scale(1.07); }
+
+    .gallery-grid {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 190px;
+      gap: 1rem;
+    }
+    .gallery-item {
+      border-radius: 22px;
+      overflow: hidden;
+      background: white;
+      box-shadow: 0 10px 28px rgba(44, 24, 16, 0.1);
+      position: relative;
+      isolation: isolate;
+    }
+    .gallery-item.large { grid-column: span 2; grid-row: span 2; }
+    .gallery-item.tall { grid-row: span 2; }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 1rem;
+      background: linear-gradient(135deg, rgba(255, 236, 236, 0.8), rgba(232, 244, 255, 0.8));
+      transition: transform 0.5s ease, filter 0.5s ease;
+    }
+    .gallery-item .photo-placeholder {
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+      border: 0;
+      background: linear-gradient(135deg, rgba(255, 236, 236, 0.8), rgba(232, 244, 255, 0.8));
+      color: var(--brown);
+    }
+    .gallery-item:hover img { transform: scale(1.08); filter: saturate(1.1); }
+    .gallery-label {
+      position: absolute;
+      left: 1rem;
+      right: 1rem;
+      bottom: 1rem;
+      background: rgba(44, 24, 16, 0.82);
+      color: var(--cream);
+      padding: 0.6rem 0.8rem;
+      border-radius: 14px;
+      font-weight: 900;
+      transform: translateY(12px);
+      opacity: 0;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .gallery-item:hover .gallery-label { transform: translateY(0); opacity: 1; }
+
+    #nosotros {
+      background: var(--yarn-red);
+      padding: 4rem 5%;
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      overflow: hidden;
+    }
+    #nosotros::before {
+      content: "";
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      border: 60px solid rgba(255, 255, 255, 0.08);
+      top: -100px;
+      right: -80px;
+    }
+    .about-text { flex: 1; min-width: 280px; position: relative; z-index: 1; }
+    .about-text h2 {
+      font-family: "Pacifico", cursive;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: white;
+      margin-bottom: 1rem;
+    }
+    .about-text p { color: rgba(255, 255, 255, 0.86); font-size: 1.05rem; line-height: 1.7; }
+    .about-stats {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(160px, 1fr));
+      gap: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+    .stat {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.12);
+      padding: 1.4rem 1rem;
+      border-radius: 20px;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .stat-number {
+      font-family: "Pacifico", cursive;
+      font-size: 1.85rem;
+      color: var(--yarn-yellow);
+      display: block;
+      line-height: 1.1;
+    }
+    .stat-label { color: white; font-weight: 800; font-size: 0.86rem; }
+
+    .custom-grid,
+    .testimonial-grid,
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .custom-showcase {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+      gap: 2rem;
+      align-items: stretch;
+    }
+    .custom-timeline {
+      position: relative;
+      grid-template-columns: 1fr;
+      gap: 1.1rem;
+      max-width: none;
+      margin: 0;
+    }
+    .custom-timeline::before {
+      content: "";
+      position: absolute;
+      top: 44px;
+      bottom: 44px;
+      left: 39px;
+      width: 6px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--yarn-red), var(--yarn-yellow), var(--yarn-green), var(--yarn-blue));
+      opacity: 0.42;
+    }
+    .custom-card,
+    .testimonial-card,
+    .faq-card {
+      background: white;
+      border-radius: 24px;
+      padding: 2rem;
+      box-shadow: 0 8px 30px rgba(44, 24, 16, 0.07);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .custom-card {
+      text-align: left;
+      position: relative;
+      display: grid;
+      grid-template-columns: 78px 124px minmax(0, 1fr);
+      gap: 1rem;
+      align-items: center;
+      min-height: 154px;
+      isolation: isolate;
+    }
+    .custom-card:hover,
+    .custom-example:hover,
+    .testimonial-card:hover,
+    .faq-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(44, 24, 16, 0.12);
+    }
+    .custom-icon {
+      width: 78px;
+      height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      border-radius: 22px;
+      background: #fff1ef;
+      color: var(--yarn-red);
+      font-size: 2rem;
+      font-weight: 900;
+      position: relative;
+      z-index: 1;
+    }
+    .custom-card:nth-child(2) .custom-icon { background: #fff8d6; color: var(--brown); }
+    .custom-card:nth-child(3) .custom-icon { background: #e8f4ff; color: var(--yarn-blue); }
+    .custom-card:nth-child(4) .custom-icon { background: #f0fff4; color: #2f7750; }
+    .custom-step-img {
+      width: 124px;
+      height: 110px;
+      border-radius: 18px;
+      object-fit: cover;
+      box-shadow: 0 12px 24px rgba(44, 24, 16, 0.13);
+    }
+    .custom-step-copy { min-width: 0; }
+    .custom-card h3,
+    .testimonial-card h3,
+    .faq-card h3 {
+      font-size: 1.16rem;
+      font-weight: 900;
+      color: var(--dark);
+      margin-bottom: 0.6rem;
+    }
+    .custom-card p,
+    .testimonial-card p,
+    .faq-card p {
+      font-size: 0.94rem;
+      color: #77675d;
+      line-height: 1.6;
+    }
+    .custom-example {
+      background: linear-gradient(145deg, #fff, #fff8f0);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(44, 24, 16, 0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+    .custom-example-media {
+      min-height: 420px;
+      background: radial-gradient(circle at 35% 25%, rgba(244, 143, 177, 0.25), transparent 48%),
+        linear-gradient(135deg, #fff1ef, #e8f4ff);
+    }
+    .custom-example-media img {
+      width: 100%;
+      height: 100%;
+      min-height: 420px;
+      display: block;
+      object-fit: cover;
+    }
+    .custom-example-body { padding: 1.5rem; }
+    .custom-example-kicker {
+      display: inline-flex;
+      margin-bottom: 0.8rem;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--dark);
+      color: var(--yarn-yellow);
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .custom-example-body h3 {
+      font-size: 1.35rem;
+      margin-bottom: 0.6rem;
+    }
+    .custom-example-body p {
+      color: #77675d;
+      line-height: 1.6;
+      font-weight: 600;
+    }
+    .custom-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 1rem;
+    }
+    .custom-tags span {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(244, 200, 66, 0.24);
+      color: var(--brown);
+      font-size: 0.78rem;
+      font-weight: 900;
+    }
+    .custom-cta { text-align: center; margin-top: 2.2rem; }
+    .testimonial-card .stars { margin-bottom: 1rem; }
+    .client-name { color: var(--yarn-red); font-weight: 900; margin-top: 1rem; display: block; }
+
+    #contacto {
+      background: var(--dark);
+      padding: 4rem 5%;
+      text-align: center;
+    }
+    #contacto h2 {
+      font-family: "Pacifico", cursive;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--yarn-yellow);
+      margin-bottom: 0.8rem;
+    }
+    #contacto p { color: rgba(255, 248, 240, 0.7); font-size: 1.05rem; margin-bottom: 2rem; }
+    .nl-form { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .nl-input {
+      background: rgba(255, 248, 240, 0.08);
+      border: 2px solid rgba(255, 248, 240, 0.15);
+      color: white;
+      padding: 14px 24px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-family: "Nunito", sans-serif;
+      min-width: 280px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .nl-input::placeholder { color: rgba(255, 248, 240, 0.35); }
+    .nl-input:focus { border-color: var(--yarn-yellow); }
+
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--dark);
+      color: var(--yarn-yellow);
+      font-weight: 900;
+      padding: 14px 24px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      z-index: 9998;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+      pointer-events: none;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    .whatsapp-float {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background: #25d366;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 12px 28px rgba(37, 211, 102, 0.35);
+      z-index: 9997;
+      cursor: none;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .whatsapp-float:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 18px 34px rgba(37, 211, 102, 0.42); }
+    .whatsapp-float svg { width: 34px; height: 34px; fill: currentColor; }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      background: #1a0e08;
+      padding: 3rem 5% 1.5rem;
+    }
+    .footer-top {
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255, 248, 240, 0.07);
+      margin-bottom: 2rem;
+    }
+    .footer-brand { flex: 1.5; min-width: 220px; }
+    .footer-brand .logo { font-size: 1.7rem; display: block; margin-bottom: 1rem; }
+    .footer-brand p { color: rgba(255, 248, 240, 0.48); font-size: 0.9rem; line-height: 1.7; }
+    .footer-col { flex: 1; min-width: 150px; }
+    .footer-col h4 {
+      color: var(--yarn-yellow);
+      font-weight: 900;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .footer-col a {
+      display: block;
+      color: rgba(255, 248, 240, 0.48);
+      text-decoration: none;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+      cursor: none;
+    }
+    .footer-col a:hover { color: var(--cream); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-bottom p { color: rgba(255, 248, 240, 0.35); font-size: 0.82rem; }
+    .social-links { display: flex; gap: 0.8rem; }
+    .social-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255, 248, 240, 0.07);
+      color: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.78rem;
+      transition: background 0.2s, transform 0.2s;
+      cursor: none;
+    }
+    .social-btn:hover { background: var(--yarn-red); transform: scale(1.15); }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 920px) {
+      .featured-grid,
+      .custom-showcase,
+      .featured-card { grid-template-columns: 1fr; }
+      .featured-card { min-height: 0; }
+      .custom-example {
+        max-width: 620px;
+        margin: 0 auto;
+      }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item.large { grid-column: span 2; }
+      .gallery-item.tall { grid-row: span 1; }
+    }
+
+    @media (max-width: 700px) {
+      body { cursor: auto; }
+      .cursor { display: none; }
+      header { height: 68px; }
+      .logo { font-size: 1.55rem; }
+      .menu-toggle { display: flex; }
+      nav {
+        position: fixed;
+        top: 68px;
+        left: 0;
+        right: 0;
+        display: grid;
+        gap: 0;
+        background: rgba(44, 24, 16, 0.98);
+        border-top: 1px solid rgba(255, 248, 240, 0.1);
+        transform: translateY(-120%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.25s ease, opacity 0.25s ease;
+      }
+      nav.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+      nav a {
+        margin: 0;
+        padding: 1rem 5%;
+        border-bottom: 1px solid rgba(255, 248, 240, 0.08);
+        cursor: pointer;
+      }
+      #inicio { min-height: 86vh; padding: 3rem 5%; }
+      #inicio h1 { font-size: clamp(3rem, 15vw, 4.4rem); }
+      #inicio p { font-size: 1.05rem; }
+      .hero-badge { letter-spacing: 1.5px; font-size: 0.68rem; }
+      .float-item { opacity: 0.35; }
+      .prod-footer { align-items: flex-start; flex-direction: column; }
+      .add-btn { width: 100%; }
+      .custom-timeline::before { left: 31px; }
+      .custom-card {
+        grid-template-columns: 62px minmax(0, 1fr);
+        gap: 0.9rem;
+      }
+      .custom-icon {
+        width: 62px;
+        height: 62px;
+        border-radius: 18px;
+        font-size: 1.45rem;
+      }
+      .custom-step-img {
+        grid-column: 1 / -1;
+        width: 100%;
+        height: 180px;
+        order: -1;
+      }
+      .custom-step-copy { grid-column: 2; }
+      .custom-example-media,
+      .custom-example-media img { min-height: 320px; }
+      .about-stats { grid-template-columns: 1fr; }
+      .nl-input { min-width: 0; width: 100%; }
+      .nl-form .btn-primary { width: 100%; }
+      .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 210px; }
+      .gallery-item.large { grid-column: span 1; grid-row: span 1; }
+      .featured-media img.real-product-photo { max-height: 340px; }
+      .whatsapp-float { right: 16px; bottom: 16px; width: 56px; height: 56px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor" id="cursor"></div>
+  <div class="toast" id="toast"></div>
+  <div class="yarn-line"></div>
+  <div class="yarn-line"></div>
+
+  <header>
+    <a href="#inicio" class="logo">Little Dreams</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="mainNav">
+      <a href="#inicio">Inicio</a>
+      <a href="#coleccion">Colección</a>
+      <a href="#catalogo">Catálogo</a>
+      <a href="#productos">Productos</a>
+      <a href="#personalizar">Personalizados</a>
+      <a href="#testimonios">Testimonios</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <section id="inicio">
+    <div class="floaters" aria-hidden="true">
+      <span class="float-item"><img src="" data-art="yarn" alt="" /></span>
+      <span class="float-item"><img src="" data-art="hook" alt="" /></span>
+      <span class="float-item"><img src="" data-art="bear" alt="" /></span>
+      <span class="float-item"><img src="" data-art="bunny" alt="" /></span>
+      <span class="float-item"><img src="" data-art="dino" alt="" /></span>
+      <span class="float-item"><img src="" data-art="unicorn" alt="" /></span>
+    </div>
+    <div class="hero-content">
+      <span class="hero-badge">Tejidos a mano con amor</span>
+      <h1>Muñecos de<br /><span>Crochet</span><br />Únicos</h1>
+      <p>Cada amigurumi es una pieza artesanal, suave y llena de ternura. Diseños originales para regalar, decorar y conservar con cariño.</p>
+      <div class="hero-btns">
+        <a href="#catalogo" class="btn-primary">Ver catálogo</a>
+        <a href="#personalizar" class="btn-secondary">Personalizar el mío</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="coleccion" class="reveal">
+    <div class="section-title">
+      <h2>Tipos de Amigurumis</h2>
+      <p>Personajes originales tejidos con hilo suave y detalles bordados a mano</p>
+      <div class="title-line"></div>
+    </div>
+    <div class="cat-grid">
+      <div class="cat-card" onclick="scrollToSection('productos')"><img src="imagenes/muñeca%201.jpg" alt="Muñeca artesanal de crochet" /><h3>Muñeca artesanal</h3><p>Muñeca de crochet tejida a mano desde $850 MXN</p></div>
+      <div class="cat-card" onclick="scrollToSection('productos')"><img src="imagenes/amimalito1.jpg" alt="Animalito de crochet" /><h3>Animalito de crochet</h3><p>Animalitos tiernos tejidos a mano desde $800 MXN</p></div>
+      <div class="cat-card" onclick="scrollToSection('productos')"><img src="imagenes/pepo.jpg" alt="Muñeco personalizado de crochet" /><h3>Muñeco personalizado</h3><p>Colores, ropa y detalles elegidos por el cliente</p></div>
+      <div class="cat-card" onclick="scrollToSection('productos')"><img src="imagenes/jirafa%201.webp" alt="Jirafa de crochet" /><h3>Jirafa de crochet</h3><p>Diseño tierno con acabados bordados a mano</p></div>
+      <div class="cat-card" onclick="scrollToSection('productos')"><img src="imagenes/muñeca%204.jpg" alt="Muñeca con vestido tejido" /><h3>Muñeca con vestido</h3><p>Vestido tejido, peinado y detalles delicados</p></div>
+      <div class="cat-card" onclick="scrollToSection('productos')"><img src="imagenes/konata.webp" alt="Personaje original personalizado de crochet" /><h3>Personaje original</h3><p>Creación personalizada con accesorios especiales</p></div>
+    </div>
+  </section>
+
+  <section id="catalogo" class="reveal">
+    <div class="section-title">
+      <h2>Catálogo Destacado</h2>
+      <p>Piezas artesanales desde $800 MXN, listas para regalar o personalizar</p>
+      <div class="title-line"></div>
+    </div>
+    <div class="featured-grid">
+      <article class="featured-card main">
+        <div class="featured-media"><img class="real-product-photo" src="imagen%202/mu%C3%B1eca%20artesanal.jpg" alt="Muñeca artesanal Little Dreams de cabello rojo rizado y vestido azul" /></div>
+        <div class="featured-info">
+          <span class="featured-badge">Producto real</span>
+          <h3>Muñeca artesanal Little Dreams</h3>
+          <p>Muñeca tejida a mano en crochet con vestido azul, cabello rojo rizado y detalles personalizados. Producto artesanal elaborado por Little Dreams.</p>
+          <span class="price">Desde $1,200 MXN</span>
+        </div>
+      </article>
+      <div class="featured-stack">
+        <article class="featured-mini">
+          <div class="featured-mini-media"><img src="imagenes/jirafa%201.webp" alt="Jirafa de crochet" /></div>
+          <div class="featured-info">
+            <h3>Jirafa de crochet</h3>
+            <p>Tierna, suave y con detalles tejidos a mano.</p>
+            <span class="price">$900 MXN</span>
+          </div>
+        </article>
+        <article class="featured-mini">
+          <div class="featured-mini-media"><img src="imagenes/konata.webp" alt="Personaje original personalizado de crochet" /></div>
+          <div class="featured-info">
+            <h3>Personaje original personalizado</h3>
+            <p>Diseño único con colores y detalles especiales.</p>
+            <span class="price">$1,200 MXN</span>
+          </div>
+        </article>
+      </div>
+    </div>
+    <p class="catalog-note">Los precios pueden variar según tamaño, diseño, materiales y nivel de personalización.</p>
+  </section>
+
+  <section id="productos" class="reveal">
+    <div class="section-title">
+      <h2>Colección Destacada</h2>
+      <p>Diseños futuros y catálogo de inspiración Little Dreams con precios en pesos mexicanos</p>
+      <div class="title-line"></div>
+    </div>
+    <div class="prod-grid">
+      <article class="prod-card">
+        <div class="prod-img"><img src="imagenes/muñeca%201.jpg" alt="Muñeca artesanal de crochet" /><span class="prod-badge">Más vendido</span></div>
+        <div class="prod-body"><div class="stars">★★★★★</div><h3>Muñeca artesanal de crochet</h3><p>Muñeca tejida a mano con carita bordada, cabello de hilo y acabado suave.</p><div class="prod-footer"><span class="price">$850 MXN</span><button class="add-btn" onclick="addToCart('Muñeca artesanal de crochet', '$850 MXN')">Agregar</button></div></div>
+      </article>
+      <article class="prod-card">
+        <div class="prod-img" style="background:linear-gradient(135deg,#e8f4ff,#cce5ff);"><img src="imagenes/amimalito1.jpg" alt="Animalito de crochet" /><span class="prod-badge">Nuevo</span></div>
+        <div class="prod-body"><div class="stars">★★★★★</div><h3>Animalito de crochet</h3><p>Amigurumi tierno en forma de animalito, tejido con tonos suaves y detalles bordados.</p><div class="prod-footer"><span class="price">$800 MXN</span><button class="add-btn" onclick="addToCart('Animalito de crochet', '$800 MXN')">Agregar</button></div></div>
+      </article>
+      <article class="prod-card">
+        <div class="prod-img" style="background:linear-gradient(135deg,#fff8e1,#ffeab0);"><img src="imagenes/pepo.jpg" alt="Muñeco personalizado de crochet" /></div>
+        <div class="prod-body"><div class="stars">★★★★★</div><h3>Muñeco personalizado</h3><p>Muñeco tejido a mano con colores, ropa y rasgos seleccionados por el cliente.</p><div class="prod-footer"><span class="price">$950 MXN</span><button class="add-btn" onclick="addToCart('Muñeco personalizado', '$950 MXN')">Agregar</button></div></div>
+      </article>
+      <article class="prod-card">
+        <div class="prod-img" style="background:linear-gradient(135deg,#f0fff4,#c6f6d5);"><img src="imagenes/jirafa%201.webp" alt="Jirafa de crochet" /><span class="prod-badge">Especial</span></div>
+        <div class="prod-body"><div class="stars">★★★★★</div><h3>Jirafa de crochet</h3><p>Jirafa tejida con manchas suaves, detalles bordados y una presencia dulce para regalo.</p><div class="prod-footer"><span class="price">$900 MXN</span><button class="add-btn" onclick="addToCart('Jirafa de crochet', '$900 MXN')">Agregar</button></div></div>
+      </article>
+      <article class="prod-card">
+        <div class="prod-img" style="background:linear-gradient(135deg,#fff0f6,#ffcce8);"><img src="imagenes/muñeca%204.jpg" alt="Muñeca con vestido tejido" /></div>
+        <div class="prod-body"><div class="stars">★★★★★</div><h3>Muñeca con vestido tejido</h3><p>Muñeca de crochet con vestido elaborado a mano, peinado y detalles delicados.</p><div class="prod-footer"><span class="price">$1,100 MXN</span><button class="add-btn" onclick="addToCart('Muñeca con vestido tejido', '$1,100 MXN')">Agregar</button></div></div>
+      </article>
+      <article class="prod-card">
+        <div class="prod-img" style="background:linear-gradient(135deg,#f3e8ff,#ddd6fe);"><img src="imagenes/konata.webp" alt="Personaje original personalizado de crochet" /><span class="prod-badge">Personalizado</span></div>
+        <div class="prod-body"><div class="stars">★★★★★</div><h3>Personaje original personalizado</h3><p>Figura original creada desde cero con colores, ropa, accesorios y detalles especiales.</p><div class="prod-footer"><span class="price">$1,200 MXN</span><button class="add-btn" onclick="addToCart('Personaje original personalizado', '$1,200 MXN')">Agregar</button></div></div>
+      </article>
+      <article class="prod-card client-new">
+        <div class="prod-img" style="background:linear-gradient(135deg,#fff8e1,#ffe8a8);"><img class="client-photo" src="Productos%20Nuevos/cantiflas.jpg" alt="Artículo temporal 01 Little Dreams" /><span class="prod-badge">Nuevo</span></div>
+        <div class="prod-body"><div class="stars">★★★★★</div><h3>Artículo temporal 01</h3><p>Pieza artesanal de crochet agregada al catálogo con nombre provisional hasta recibir la ficha final del cliente.</p><div class="prod-footer"><span class="price">Por cotizar</span><button class="add-btn" onclick="addToCart('Artículo temporal 01', 'Por cotizar')">Agregar</button></div></div>
+      </article>
+      <article class="prod-card client-new">
+        <div class="prod-img" style="background:linear-gradient(135deg,#e8f4ff,#d8ecff);"><img class="client-photo" src="Productos%20Nuevos/unicornio.jpg" alt="Artículo temporal 02 Little Dreams" /><span class="prod-badge">Nuevo</span></div>
+        <div class="prod-body"><div class="stars">★★★★★</div><h3>Artículo temporal 02</h3><p>Pieza artesanal de crochet agregada al catálogo con nombre provisional hasta recibir la ficha final del cliente.</p><div class="prod-footer"><span class="price">Por cotizar</span><button class="add-btn" onclick="addToCart('Artículo temporal 02', 'Por cotizar')">Agregar</button></div></div>
+      </article>
+      <article class="prod-card client-new">
+        <div class="prod-img" style="background:linear-gradient(135deg,#f0fff4,#d9f7e6);"><img class="client-photo" src="Productos%20Nuevos/pandilla.jpg" alt="Artículo temporal 03 Little Dreams" /><span class="prod-badge">Nuevo</span></div>
+        <div class="prod-body"><div class="stars">★★★★★</div><h3>Artículo temporal 03</h3><p>Pieza artesanal de crochet agregada al catálogo con nombre provisional hasta recibir la ficha final del cliente.</p><div class="prod-footer"><span class="price">Por cotizar</span><button class="add-btn" onclick="addToCart('Artículo temporal 03', 'Por cotizar')">Agregar</button></div></div>
+      </article>
+      <article class="prod-card client-new">
+        <div class="prod-img" style="background:linear-gradient(135deg,#fff0f6,#ffd7ea);"><img class="client-photo" src="Productos%20Nuevos/dulcero.jpg" alt="Artículo temporal 04 Little Dreams" /><span class="prod-badge">Nuevo</span></div>
+        <div class="prod-body"><div class="stars">★★★★★</div><h3>Artículo temporal 04</h3><p>Pieza artesanal de crochet agregada al catálogo con nombre provisional hasta recibir la ficha final del cliente.</p><div class="prod-footer"><span class="price">Por cotizar</span><button class="add-btn" onclick="addToCart('Artículo temporal 04', 'Por cotizar')">Agregar</button></div></div>
+      </article>
+      <article class="prod-card client-new">
+        <div class="prod-img" style="background:linear-gradient(135deg,#fff1ef,#ffd9d2);"><img class="client-photo" src="Productos%20Nuevos/ramo.jpg" alt="Artículo temporal 05 Little Dreams" /><span class="prod-badge">Nuevo</span></div>
+        <div class="prod-body"><div class="stars">★★★★★</div><h3>Artículo temporal 05</h3><p>Pieza artesanal de crochet agregada al catálogo con nombre provisional hasta recibir la ficha final del cliente.</p><div class="prod-footer"><span class="price">Por cotizar</span><button class="add-btn" onclick="addToCart('Artículo temporal 05', 'Por cotizar')">Agregar</button></div></div>
+      </article>
+      <article class="prod-card client-new">
+        <div class="prod-img" style="background:linear-gradient(135deg,#f3e8ff,#e7d7ff);"><img class="client-photo" src="Productos%20Nuevos/theuana.jpg" alt="Artículo temporal 06 Little Dreams" /><span class="prod-badge">Nuevo</span></div>
+        <div class="prod-body"><div class="stars">★★★★★</div><h3>Artículo temporal 06</h3><p>Pieza artesanal de crochet agregada al catálogo con nombre provisional hasta recibir la ficha final del cliente.</p><div class="prod-footer"><span class="price">Por cotizar</span><button class="add-btn" onclick="addToCart('Artículo temporal 06', 'Por cotizar')">Agregar</button></div></div>
+      </article>
+      <article class="prod-card client-new">
+        <div class="prod-img" style="background:linear-gradient(135deg,#e8f4ff,#f0fff4);"><img class="client-photo" src="Productos%20Nuevos/dino.jpg" alt="Artículo temporal 07 Little Dreams" /><span class="prod-badge">Nuevo</span></div>
+        <div class="prod-body"><div class="stars">★★★★★</div><h3>Artículo temporal 07</h3><p>Pieza artesanal de crochet agregada al catálogo con nombre provisional hasta recibir la ficha final del cliente.</p><div class="prod-footer"><span class="price">Por cotizar</span><button class="add-btn" onclick="addToCart('Artículo temporal 07', 'Por cotizar')">Agregar</button></div></div>
+      </article>
+    </div>
+    <p class="catalog-note">Los precios pueden variar según tamaño, diseño, materiales y nivel de personalización.</p>
+  </section>
+
+  <section id="galeria" class="reveal">
+    <div class="section-title">
+      <h2>Galería de Productos</h2>
+      <p>Una vista moderna para apreciar colores, formas y acabados artesanales</p>
+      <div class="title-line"></div>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item large"><img src="imagenes/muñeca%205.jpg" alt="Muñeca personalizada de crochet" /><span class="gallery-label">Muñecas personalizadas</span></div>
+      <div class="gallery-item"><img src="imagenes/tortu.jpg" alt="Animalito de crochet" /><span class="gallery-label">Animalitos suaves</span></div>
+      <div class="gallery-item tall"><img src="imagenes/jirafa2.jpg" alt="Jirafa de crochet" /><span class="gallery-label">Jirafas de crochet</span></div>
+      <div class="gallery-item"><img src="imagenes/ninja.webp" alt="Muñeco personalizado de crochet" /><span class="gallery-label">Muñecos personalizados</span></div>
+      <div class="gallery-item"><img src="imagenes/muñeca8.jpg" alt="Muñeca con vestido tejido" /><span class="gallery-label">Vestidos tejidos</span></div>
+      <div class="gallery-item"><img src="imagenes/gusanito1.jpg" alt="Personaje original personalizado de crochet" /><span class="gallery-label">Personajes originales</span></div>
+    </div>
+  </section>
+
+  <section id="nosotros" class="reveal">
+    <div class="about-text">
+      <h2>Hechos con hilo,<br />rellenos de amor</h2>
+      <p>En Little Dreams cada pieza se teje con paciencia, cuidado y materiales seleccionados. Creamos muñecos originales de crochet para quienes buscan un regalo artesanal, tierno y diferente.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat"><span class="stat-number">Hechos a mano</span><span class="stat-label">Productos artesanales</span></div>
+      <div class="stat"><span class="stat-number">A tu gusto</span><span class="stat-label">Diseños personalizados</span></div>
+      <div class="stat"><span class="stat-number">Suaves</span><span class="stat-label">Materiales de calidad</span></div>
+      <div class="stat"><span class="stat-number">Cercana</span><span class="stat-label">Atención personalizada</span></div>
+    </div>
+  </section>
+
+  <section id="personalizar" class="reveal">
+    <div class="section-title">
+      <h2>Productos personalizados</h2>
+      <p>El cliente puede solicitar colores, ropa, accesorios y detalles especiales para crear una pieza única</p>
+      <div class="title-line"></div>
+    </div>
+    <div class="custom-showcase">
+      <div class="custom-grid custom-timeline">
+        <div class="custom-card">
+          <span class="custom-icon">01</span>
+          <img class="custom-step-img" src="imagenes/muñeca2.png" alt="Muñeca de crochet en colores pastel" />
+          <div class="custom-step-copy"><h3>Colores a elección</h3><p>Selecciona la combinación de hilos que más te guste entre tonos suaves, vibrantes, naturales o de temporada.</p></div>
+        </div>
+        <div class="custom-card">
+          <span class="custom-icon">02</span>
+          <img class="custom-step-img" src="imagenes/muñeca%204.jpg" alt="Muñeca de crochet con vestido tejido" />
+          <div class="custom-step-copy"><h3>Ropa y estilo</h3><p>Define vestidos, suéteres, zapatos, moños, peinados o prendas tejidas que hagan especial al personaje.</p></div>
+        </div>
+        <div class="custom-card">
+          <span class="custom-icon">03</span>
+          <img class="custom-step-img" src="imagenes/muñeca10.webp" alt="Muñeca de crochet con accesorios especiales" />
+          <div class="custom-step-copy"><h3>Accesorios</h3><p>Agrega bolsitas, flores, sombreros, bufandas, juguetes miniatura o elementos que acompañen la historia de la pieza.</p></div>
+        </div>
+        <div class="custom-card">
+          <span class="custom-icon">04</span>
+          <img class="custom-step-img" src="imagenes/muñeca8.jpg" alt="Muñeca de crochet terminada con detalles delicados" />
+          <div class="custom-step-copy"><h3>Detalles especiales</h3><p>Podemos incluir nombre, bordados, rasgos, colores favoritos y acabados pensados para cada regalo.</p></div>
+        </div>
+      </div>
+
+      <article class="custom-example">
+        <div class="custom-example-media">
+          <img src="imagenes/muñeca7.webp" alt="Ejemplo de muñeca personalizada terminada de crochet" />
+        </div>
+        <div class="custom-example-body">
+          <span class="custom-example-kicker">Ejemplo terminado</span>
+          <h3>Muñeca personalizada con vestido floral</h3>
+          <p>Una pieza final puede combinar paleta de color, ropa tejida, accesorios y detalles bordados en una figura lista para regalar.</p>
+          <div class="custom-tags" aria-label="Detalles incluidos en el ejemplo">
+            <span>Vestido tejido</span>
+            <span>Flores</span>
+            <span>Peinado especial</span>
+            <span>Paleta pastel</span>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="custom-cta">
+      <a href="#contacto" class="btn-primary">Pedir diseño personalizado</a>
+    </div>
+  </section>
+
+  <section id="testimonios" class="reveal">
+    <div class="section-title">
+      <h2>Testimonios</h2>
+      <p>Comentarios de clientes que recibieron piezas hechas especialmente para ellos</p>
+      <div class="title-line"></div>
+    </div>
+    <div class="testimonial-grid">
+      <article class="testimonial-card"><div class="stars">★★★★★</div><h3>Un regalo precioso</h3><p>La muñeca llegó muy bien terminada, con colores hermosos y el nombre bordado. Se nota el cariño en cada detalle.</p><span class="client-name">Mariana G.</span></article>
+      <article class="testimonial-card"><div class="stars">★★★★★</div><h3>Excelente atención</h3><p>Me ayudaron a elegir tonos y accesorios. El conejito quedó tierno, suave y perfecto para un regalo escolar.</p><span class="client-name">Laura M.</span></article>
+      <article class="testimonial-card"><div class="stars">★★★★★</div><h3>Muy buena calidad</h3><p>Compré un osito y un dinosaurio. Están firmes, bonitos y no parecen productos genéricos; cada uno se siente único.</p><span class="client-name">Carlos R.</span></article>
+    </div>
+  </section>
+
+  <section id="faq" class="reveal">
+    <div class="section-title">
+      <h2>Preguntas Frecuentes</h2>
+      <p>Información útil antes de pedir tu amigurumi personalizado</p>
+      <div class="title-line"></div>
+    </div>
+    <div class="faq-grid">
+      <article class="faq-card"><h3>¿Puedo pedir un diseño personalizado?</h3><p>Sí. Puedes elegir colores, tipo de personaje, accesorios y detalles como nombre bordado o ropita especial.</p></article>
+      <article class="faq-card"><h3>¿Cuánto tarda un pedido?</h3><p>El tiempo depende del tamaño y detalle. Una pieza sencilla puede prepararse en pocos días; las personalizadas requieren más cuidado.</p></article>
+      <article class="faq-card"><h3>¿Son aptos para regalo?</h3><p>Sí. Los productos se entregan con empaque artesanal y se revisan para cuidar presentación, suavidad y acabados.</p></article>
+      <article class="faq-card"><h3>¿Usan personajes comerciales?</h3><p>No. Little Dreams trabaja con muñecas, animalitos y personajes originales para mantener una propuesta propia y artesanal.</p></article>
+    </div>
+  </section>
+
+  <section id="contacto" class="reveal">
+    <h2>Hablemos de tu pedido</h2>
+    <p>Escríbenos para cotizar un diseño personalizado o conocer disponibilidad de piezas listas para entrega.</p>
+    <div class="nl-form">
+      <input class="nl-input" type="email" id="emailInput" placeholder="tu@correo.com" />
+      <button class="btn-primary" onclick="handleSubscribe()">Solicitar información</button>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#inicio" class="logo">Little Dreams</a>
+        <p>Muñecos y figuras de crochet tejidos a mano. Cada pieza es única, original y pensada para hacer sonreír.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Tienda</h4>
+        <a href="#catalogo">Catálogo Destacado</a>
+        <a href="#productos">Productos</a>
+        <a href="#galeria">Galería</a>
+        <a href="#personalizar">Personalizar</a>
+      </div>
+      <div class="footer-col">
+        <h4>Ayuda</h4>
+        <a href="#faq">Preguntas frecuentes</a>
+        <a href="#contacto">Cómo comprar</a>
+        <a href="#contacto">Envíos</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+      <div class="footer-col">
+        <h4>Nosotros</h4>
+        <a href="#nosotros">Historia</a>
+        <a href="#testimonios">Testimonios</a>
+        <a href="#coleccion">Colecciones</a>
+        <a href="#contacto">Cotizar</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Little Dreams · Todos los derechos reservados · Sitio web desarrollado por Play Nova para Little Dreams.</p>
+      <div class="social-links">
+        <div class="social-btn" title="Facebook">Fb</div>
+        <div class="social-btn" title="Instagram">Ig</div>
+        <div class="social-btn" title="TikTok">Tk</div>
+        <div class="social-btn" title="Pinterest">Pin</div>
+      </div>
+    </div>
+  </footer>
+
+  <a class="whatsapp-float" href="https://wa.me/5215555555555?text=Hola%20Little%20Dreams%2C%20quiero%20informaci%C3%B3n%20sobre%20un%20amigurumi" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.02 3.2A12.7 12.7 0 0 0 5.14 22.45L3.6 28.8l6.5-1.52A12.67 12.67 0 1 0 16.02 3.2Zm0 2.35a10.32 10.32 0 0 1 8.78 15.78 10.31 10.31 0 0 1-13.95 3.78l-.46-.25-3.58.84.85-3.48-.3-.49A10.34 10.34 0 0 1 16.02 5.55Zm-4.42 4.9c-.23 0-.6.08-.92.43-.32.36-1.22 1.2-1.22 2.9 0 1.72 1.25 3.38 1.42 3.61.17.23 2.42 3.88 5.97 5.28 2.95 1.16 3.55.93 4.19.87.64-.06 2.06-.84 2.35-1.66.29-.81.29-1.5.2-1.65-.08-.15-.31-.23-.66-.4-.35-.17-2.06-1.02-2.38-1.13-.32-.12-.55-.18-.78.17-.23.35-.9 1.13-1.1 1.36-.2.23-.41.26-.76.09-.35-.18-1.48-.55-2.82-1.74a10.56 10.56 0 0 1-1.95-2.43c-.2-.35-.02-.54.15-.71.16-.16.35-.41.52-.61.17-.2.23-.35.35-.58.12-.23.06-.43-.03-.61-.09-.17-.78-1.89-1.07-2.59-.28-.67-.57-.58-.78-.59h-.67Z"/></svg>
+  </a>
+
+  <script>
+    const art = {
+      yarn: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240"><rect width="240" height="240" rx="42" fill="#fff8f0"/><circle cx="118" cy="121" r="72" fill="#f48fb1"/><path d="M58 116c35 16 82 12 124-10M61 143c42-6 81-2 113 16M79 77c21 33 66 64 104 77M153 58c-35 21-62 58-80 112" fill="none" stroke="#c0392b" stroke-width="9" stroke-linecap="round" opacity=".45"/><path d="M166 153c25-2 45 7 57 29" fill="none" stroke="#8b5e3c" stroke-width="9" stroke-linecap="round"/></svg>`,
+      hook: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240"><rect width="240" height="240" rx="42" fill="#fff8f0"/><path d="M64 176 174 66c13-13 34 5 23 19l-7 9" fill="none" stroke="#8b5e3c" stroke-width="18" stroke-linecap="round"/><path d="M90 150 61 179" stroke="#2e5eaa" stroke-width="22" stroke-linecap="round"/><path d="M156 83c17 6 27 17 30 33" fill="none" stroke="#f4c842" stroke-width="9" stroke-linecap="round"/></svg>`,
+      doll: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320"><rect width="320" height="320" rx="48" fill="#fff3ef"/><ellipse cx="160" cy="266" rx="86" ry="18" fill="#2c1810" opacity=".12"/><path d="M103 138c-30 22-47 61-43 105h200c4-44-13-83-43-105Z" fill="#2e5eaa"/><path d="M93 150c18 18 42 28 67 28s49-10 67-28v91H93Z" fill="#f48fb1"/><circle cx="160" cy="102" r="58" fill="#f1c29b"/><path d="M97 105c1-56 36-83 70-80 44 4 70 39 58 86-20-16-48-18-75-43-10 25-29 35-53 37Z" fill="#8b3f24"/><circle cx="133" cy="106" r="6" fill="#2c1810"/><circle cx="188" cy="106" r="6" fill="#2c1810"/><path d="M142 132c12 10 25 10 37 0" fill="none" stroke="#c0392b" stroke-width="5" stroke-linecap="round"/><path d="M83 195c-26 4-38 20-39 45M237 195c26 4 38 20 39 45" fill="none" stroke="#f1c29b" stroke-width="17" stroke-linecap="round"/><path d="M120 236h80" stroke="#fff8f0" stroke-width="8" stroke-linecap="round"/><path d="M124 30c-18 18-20 41-5 61M201 38c12 23 8 43-9 59" fill="none" stroke="#8b3f24" stroke-width="16" stroke-linecap="round"/></svg>`,
+      bunny: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320"><rect width="320" height="320" rx="48" fill="#e8f4ff"/><ellipse cx="160" cy="267" rx="92" ry="18" fill="#2c1810" opacity=".1"/><path d="M110 106c-32-78-14-95 12-83 28 14 42 61 45 96M210 106c32-78 14-95-12-83-28 14-42 61-45 96" fill="#f7f0e8" stroke="#8b5e3c" stroke-width="7"/><path d="M126 92c-18-50-6-60 7-52 15 10 24 45 25 78M194 92c18-50 6-60-7-52-15 10-24 45-25 78" fill="#f48fb1" opacity=".45"/><circle cx="160" cy="160" r="72" fill="#f7f0e8" stroke="#8b5e3c" stroke-width="7"/><circle cx="134" cy="151" r="7" fill="#2c1810"/><circle cx="186" cy="151" r="7" fill="#2c1810"/><path d="M160 166v17M142 185c12 9 24 9 36 0" fill="none" stroke="#c0392b" stroke-width="5" stroke-linecap="round"/><circle cx="160" cy="166" r="7" fill="#f48fb1"/><path d="M105 222c-18 11-27 26-27 45M215 222c18 11 27 26 27 45" fill="none" stroke="#f7f0e8" stroke-width="20" stroke-linecap="round"/><path d="M129 215c20 14 42 14 62 0" fill="none" stroke="#2e5eaa" stroke-width="12" stroke-linecap="round"/></svg>`,
+      bear: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320"><rect width="320" height="320" rx="48" fill="#fff8e1"/><ellipse cx="160" cy="266" rx="86" ry="18" fill="#2c1810" opacity=".1"/><circle cx="105" cy="91" r="35" fill="#c8904a"/><circle cx="215" cy="91" r="35" fill="#c8904a"/><circle cx="105" cy="91" r="18" fill="#ffe0a8"/><circle cx="215" cy="91" r="18" fill="#ffe0a8"/><circle cx="160" cy="159" r="82" fill="#d6a35d" stroke="#8b5e3c" stroke-width="7"/><circle cx="132" cy="145" r="7" fill="#2c1810"/><circle cx="188" cy="145" r="7" fill="#2c1810"/><ellipse cx="160" cy="172" rx="33" ry="25" fill="#ffe0a8"/><circle cx="160" cy="162" r="8" fill="#2c1810"/><path d="M146 177c8 8 20 8 28 0" fill="none" stroke="#2c1810" stroke-width="5" stroke-linecap="round"/><path d="M96 224c-21 11-31 26-31 44M224 224c21 11 31 26 31 44" fill="none" stroke="#d6a35d" stroke-width="22" stroke-linecap="round"/><path d="M119 221h82" stroke="#c0392b" stroke-width="16" stroke-linecap="round"/></svg>`,
+      unicorn: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320"><rect width="320" height="320" rx="48" fill="#f0fff4"/><ellipse cx="160" cy="268" rx="90" ry="18" fill="#2c1810" opacity=".1"/><path d="M146 77 163 25l17 52Z" fill="#f4c842" stroke="#8b5e3c" stroke-width="6"/><path d="M104 106c-20-36-8-52 18-29M216 106c20-36 8-52-18-29" fill="#fff8f0" stroke="#8b5e3c" stroke-width="7"/><circle cx="160" cy="151" r="75" fill="#fff8f0" stroke="#8b5e3c" stroke-width="7"/><path d="M104 107c12-41 53-64 93-45 38 18 44 48 37 82-19-29-48-37-82-44-16 18-32 25-48 7Z" fill="#f48fb1"/><path d="M125 77c19 6 41 6 64 0" stroke="#2e5eaa" stroke-width="13" stroke-linecap="round"/><circle cx="133" cy="148" r="7" fill="#2c1810"/><circle cx="187" cy="148" r="7" fill="#2c1810"/><path d="M145 177c11 9 22 9 33 0" fill="none" stroke="#c0392b" stroke-width="5" stroke-linecap="round"/><path d="M104 218c-20 12-30 27-30 48M216 218c20 12 30 27 30 48" fill="none" stroke="#fff8f0" stroke-width="20" stroke-linecap="round"/><path d="M219 114c27 3 44 26 38 57-4 22-24 35-45 34" fill="none" stroke="#4caf78" stroke-width="15" stroke-linecap="round"/></svg>`,
+      fairy: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320"><rect width="320" height="320" rx="48" fill="#fff0f6"/><ellipse cx="160" cy="267" rx="86" ry="18" fill="#2c1810" opacity=".1"/><path d="M104 136C54 93 33 146 89 174M216 136c50-43 71 10 15 38" fill="#d9f4ff" stroke="#2e5eaa" stroke-width="6" opacity=".8"/><circle cx="160" cy="100" r="55" fill="#f1c29b"/><path d="M111 102c5-45 36-70 72-59 30 9 43 35 32 67-34-3-66-12-91-34-1 11-5 20-13 26Z" fill="#c6c2d6"/><circle cx="139" cy="101" r="6" fill="#2c1810"/><circle cx="184" cy="101" r="6" fill="#2c1810"/><path d="M146 126c10 8 21 8 31 0" fill="none" stroke="#c0392b" stroke-width="5" stroke-linecap="round"/><path d="M101 146c-23 23-37 57-35 98h188c2-41-12-75-35-98-28 25-89 25-118 0Z" fill="#4caf78"/><path d="M132 175c18 10 38 10 56 0" stroke="#f4c842" stroke-width="10" stroke-linecap="round"/><path d="M101 205c-21 5-33 20-35 43M219 205c21 5 33 20 35 43" fill="none" stroke="#f1c29b" stroke-width="17" stroke-linecap="round"/></svg>`,
+      dino: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320"><rect width="320" height="320" rx="48" fill="#f3e8ff"/><ellipse cx="160" cy="267" rx="92" ry="18" fill="#2c1810" opacity=".1"/><path d="M87 210c0-69 38-124 95-124 43 0 72 29 72 72 0 50-39 86-96 86H99c-8 0-12-9-12-34Z" fill="#4caf78" stroke="#2f7750" stroke-width="7"/><path d="M131 88 145 56l16 33M169 88l17-32 16 39M207 106l27-23-2 39" fill="#f4c842" stroke="#8b5e3c" stroke-width="5" stroke-linejoin="round"/><circle cx="196" cy="142" r="7" fill="#2c1810"/><circle cx="226" cy="143" r="7" fill="#2c1810"/><path d="M199 171c14 8 28 8 42 0" fill="none" stroke="#c0392b" stroke-width="5" stroke-linecap="round"/><path d="M113 237v30M188 237v30" stroke="#4caf78" stroke-width="22" stroke-linecap="round"/><path d="M87 190c-25 5-39 22-42 48" fill="none" stroke="#4caf78" stroke-width="20" stroke-linecap="round"/></svg>`,
+      animals: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320"><rect width="320" height="320" rx="48" fill="#f8fff0"/><ellipse cx="160" cy="267" rx="96" ry="18" fill="#2c1810" opacity=".1"/><circle cx="95" cy="151" r="52" fill="#d6a35d" stroke="#8b5e3c" stroke-width="6"/><circle cx="72" cy="104" r="22" fill="#d6a35d"/><circle cx="118" cy="104" r="22" fill="#d6a35d"/><circle cx="82" cy="145" r="5" fill="#2c1810"/><circle cx="108" cy="145" r="5" fill="#2c1810"/><path d="M85 166c8 7 17 7 25 0" fill="none" stroke="#2c1810" stroke-width="4" stroke-linecap="round"/><circle cx="208" cy="153" r="58" fill="#f7f0e8" stroke="#8b5e3c" stroke-width="6"/><path d="M184 103c-25-53-5-68 14-34M232 103c25-53 5-68-14-34" fill="#f7f0e8" stroke="#8b5e3c" stroke-width="6"/><circle cx="190" cy="147" r="5" fill="#2c1810"/><circle cx="226" cy="147" r="5" fill="#2c1810"/><path d="M199 170c8 7 18 7 26 0" fill="none" stroke="#c0392b" stroke-width="4" stroke-linecap="round"/><path d="M70 212c-17 9-25 22-25 40M230 214c17 9 25 22 25 40" fill="none" stroke="#4caf78" stroke-width="16" stroke-linecap="round"/></svg>`
+    };
+
+    document.querySelectorAll("[data-art]").forEach((img) => {
+      const key = img.dataset.art;
+      img.src = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(art[key]);
+    });
+
+    const cursor = document.getElementById("cursor");
+    if (cursor) {
+      document.addEventListener("mousemove", (e) => {
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
+      });
+    }
+
+    function bindHoverTargets() {
+      document.querySelectorAll("button, a, .prod-card, .cat-card, .custom-card, .custom-example, .testimonial-card, .faq-card, .gallery-item, .social-btn").forEach((el) => {
+        el.addEventListener("mouseenter", () => {
+          if (!cursor) return;
+          cursor.style.transform = "translate(-50%,-50%) scale(2)";
+          cursor.style.background = "#F4C842";
+        });
+        el.addEventListener("mouseleave", () => {
+          if (!cursor) return;
+          cursor.style.transform = "translate(-50%,-50%) scale(1)";
+          cursor.style.background = "#C0392B";
+        });
+      });
+    }
+    bindHoverTargets();
+
+    const menuToggle = document.getElementById("menuToggle");
+    const mainNav = document.getElementById("mainNav");
+    menuToggle.addEventListener("click", () => {
+      const open = mainNav.classList.toggle("open");
+      menuToggle.classList.toggle("active", open);
+      menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    mainNav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        mainNav.classList.remove("open");
+        menuToggle.classList.remove("active");
+        menuToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+
+    const toast = document.getElementById("toast");
+    let toastTimer;
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 3000);
+    }
+
+    function addToCart(name, price) {
+      showToast(name + " (" + price + ") agregado al carrito");
+    }
+
+    function handleSubscribe() {
+      const input = document.getElementById("emailInput");
+      const email = input.value.trim();
+      const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if (!valid) {
+        showToast("Ingresa un correo válido");
+        input.focus();
+        return;
+      }
+      showToast("Gracias. Te contactaremos con más información");
+      input.value = "";
+    }
+
+    const reveals = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add("visible"), index * 70);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach((item) => observer.observe(item));
+
+    document.querySelectorAll(".prod-card, .gallery-item, .featured-card, .featured-mini").forEach((card, index) => {
+      card.style.transitionDelay = (index * 0.04) + "s";
+      card.classList.add("reveal");
+      observer.observe(card);
+    });
+  </script>
+</body>
+</html>
